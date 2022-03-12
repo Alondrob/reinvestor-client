@@ -10,9 +10,11 @@ import Feed from "./components/feed/Feed";
 import SelectedProperty from './components/properties/SelectedProperty';
 import Blogs from './components/blogs/Blogs'
 import Funding from './components/properties/Funding';
-import Calculator from './components/properties/Calculator';
+import Calculator from './components/metrics/Calculator'
 import Reports from './components/users/Reports';
 import SavedProperties from './components/users/SavedProperties';
+import Metrics from "./components/metrics/Metrics";
+import myProperties from './components/properties/myProperties';
 import Main from "./components/feed/Main";
 
 
@@ -25,7 +27,8 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Main />}></Route>
-          
+          <Route path="/metrics" element={<Metrics/>}></Route>
+          <Route path="/my-properties" element={<myProperties/>}></Route>
           {/* 
           <Route path="/search-properties" element={<PropertySearch />} />
           <Route path="selected-property/:id" element={<SelectedProperty />} />
