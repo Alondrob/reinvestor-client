@@ -4,7 +4,7 @@ import Expenses from './Expenses';
 import Income from './Income';
 import Loan from './Loan';
 import Purchase from './Purchase';
-import {AiFillPlusCircle, AiFillMinusCircle} from 'react-icons/ai'
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
 
 function Metrics() {
   const [purchase, setPurchase] = useState('');
@@ -12,7 +12,7 @@ function Metrics() {
   const [expenses, setExpenses] = useState('');
   const [loan, setLoan] = useState('');
   const [equity, setEquity] = useState('');
-  const [show, setShow] = useState(false);
+  const [active, setActive] = useState(false);
   const [metrics, setMetrics] = useState({
     purchaseComp: false, 
     incomeComp: false,
@@ -47,18 +47,31 @@ function Metrics() {
     console.log(purchase)
   }
   
-  console.log(purchase)
+   const handleActive = () => {
+     setActive(!active)
+   }
   return (
         <div>
           <form>
             {/* purchase */}
-            <div>
-            <label className='block'>Purchase</label>
-              <input type="number" onChange={(e) => setPurchase(e.target.value)}/>
+          <div className='border-y-4 border-indigo-400'>
+              <div className='border-y-4 border-indigo-400' >
+                  {metrics.purchaseComp ? 
+                    <AiFillMinusCircle style={{ height: 20, width: 30 }} onClick={() => setMetrics({ ...metrics, purchaseComp: false})}/> 
+                  : <AiFillPlusCircle style={{ height: 20, width: 30 }} onClick={() => setMetrics({ ...metrics, purchaseComp: true })} /> }
+              </div>
+              {metrics.purchaseComp && 
+              <div>
+                <label className='block'>Purchase</label>
+                <input type="number" value={purchase} onChange={(e) => setPurchase(e.target.value)} />
+              </div>
+              }
             </div>
+           
 
             {/* income */}
             <div className=''>
+        
               <div>
               <label className='block'>Monthly Rent</label>
                 <input type="number" onChange={(e) => setIncome({ ...income, rent: e.target.value })} />
