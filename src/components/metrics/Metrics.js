@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Equity from './Equity';
 import Expenses from './Expenses';
@@ -16,6 +16,7 @@ function Metrics() {
   const [equity, setEquity] = useState({});
   const [active, setActive] = useState(false);
   const [reportComp, setReportComp] = useState(false);
+  const [repServer, setRepServer] = useState([])
   const [metrics, setMetrics] = useState({
     purchaseComp: false, 
     incomeComp: false,
@@ -40,7 +41,7 @@ function Metrics() {
       property_appreciation: equity.appreciation
       
     }
-    console.log(reportObj)
+    
     let url = "http://localhost:3000/reports"
     fetch(url, {
         method: 'POST',
@@ -51,15 +52,26 @@ function Metrics() {
          body: JSON.stringify(reportObj)
       } 
     )
-      setPurchase('');
-      setIncome('');
-      setExpenses('');
-      setLoan('');
-      setEquity('');
-      setActive('');
-      setMetrics('');
-    navigate('/reports')
+    .then(response => response.json())
+      .then((data) => navigate(`reports/${data.id}`))
+      // setPurchase('');
+      // setIncome('');
+      // setExpenses('');
+      // setLoan('');
+      // setEquity('');
+      // setActive('');
+      // setMetrics(''); 
+       console.log('data',repServer)
+    
   }
+
+
+  
+
+    // if(repServer) {
+    //   navigate(`reports/${repServer.id}`)
+    // }
+
 
   return (
         <div>
@@ -195,7 +207,7 @@ function Metrics() {
           <button onClick={runMetrics}>
             Run Report
           </button>
-      {reportComp && <Link to="/reports"></Link>}
+     
         </div>
      )
 }

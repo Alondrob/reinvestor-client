@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/" element={<Main />}></Route>
           <Route path="/metrics" element={<Metrics/>}></Route>
           <Route path="/my-properties" element={<myProperties/>}></Route>
-          <Route path="/reports" element={<Reports/>} ></Route>
+          <Route path="metrics/reports/:id" element={<Reports/>} ></Route>
           {/* 
           <Route path="/search-properties" element={<PropertySearch />} />
           <Route path="selected-property/:id" element={<SelectedProperty />} />
