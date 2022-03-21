@@ -9,6 +9,7 @@ import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
 import Reports from '../users/Reports';
 
 function Metrics() {
+  const [address, setAdress] = useState('')
   const [purchase, setPurchase] = useState({});
   const [income, setIncome] = useState({});
   const [expenses, setExpenses] = useState({});
@@ -30,12 +31,14 @@ function Metrics() {
   const runMetrics = () => {
     let reportObj = {
       purchase_price: purchase,
+      address: address,
       monthly_rent: income.rent,
       annual_rent_appreciation: income.appreciation,
       annual_property_taxes: expenses.propertyTaxes,
       annual_property_repairs: expenses.propertyRepairs,
       annual_vacancy_rate: expenses.propertyVacancyRate,
       loan_years: loan.years,
+      down_pmt: loan.downPmt,
       loan_rate: loan.rate,
       exit_year: equity.exitPoint,
       property_appreciation: equity.appreciation
@@ -53,14 +56,14 @@ function Metrics() {
       } 
     )
     .then(response => response.json())
-      .then((data) => navigate(`reports/${data.id}`))
-      // setPurchase('');
-      // setIncome('');
-      // setExpenses('');
-      // setLoan('');
-      // setEquity('');
-      // setActive('');
-      // setMetrics(''); 
+      .then((data) => {
+        if(data) {
+          navigate(`reports/${data.id}`)
+        }
+      })
+      
+      
+    
        console.log('data',repServer)
     
   }
@@ -76,6 +79,10 @@ function Metrics() {
   return (
         <div>
           <form>
+            <div className="grid justify-items-center">
+                <label className="block mb-1">Adress</label>
+                <input  className="w-full px-3 border-gray-900 rounded-md text-center bg-gray-100"  type='text ' onChange={(e) => setAdress(e.target.value)}/>
+            </div>
                 {/* purchase */}
               <div className='border-y-4 ' >
                   <div className='border-y-4 bg-gray-400' >
@@ -86,7 +93,7 @@ function Metrics() {
                   {metrics.purchaseComp && 
                   <div>
                     <label className='block'>Purchase</label>
-                    <input type="number" value={purchase} onChange={(e) => setPurchase(e.target.value)} />
+                    <input type="number" min={0} step={5} value={purchase} onChange={(e) => setPurchase(e.target.value)} />
                   </div>
                   }
                 </div>
@@ -103,7 +110,7 @@ function Metrics() {
                   <div>
                     <div>
                       <label className='block'>Monthly Rent</label>
-                      <input type="number" value={income.rent} onChange={(e) => setIncome({ ...income, rent: e.target.value })} />
+                      <input type="number" min={0} step={50} value={income.rent} onChange={(e) => setIncome({ ...income, rent: e.target.value })} />
                     </div>
 
                     <div>
@@ -165,6 +172,11 @@ function Metrics() {
                         <div>
                           <label className='block'> Years </label>
                           <input type="number"  value={loan.years} step={1} onChange={(e) => setLoan({ ...loan, years: e.target.value })} />
+                        </div>
+
+                        <div>
+                          <label className='block'> Down Payment </label>
+                          <input type="number"  value={loan.downPmt} step={1} onChange={(e) => setLoan({ ...loan, downPmt: e.target.value })} />
                         </div>
 
                         <div>
