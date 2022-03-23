@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 
 function Reports() {
     const [report, setReport] = useState([]);
+    const [address, setAdress] = useState('');
+    const [costOfCapital, setCostOfCapital] = useState(0)
+    // const [noi, setNoi] = useState({})
     const {id} = useParams();
 
     console.log(id)
@@ -17,12 +20,27 @@ function Reports() {
         fetch(url)
         .then(res => res.json())
         .then(data => setReport(data))
+
     }
 
-    const expenses = report.map((val, i) => val.expenses)
-    const loan = report.map((val, i) => val.loan)
+    const numArr = () => {
+        let newArr = [];
 
-    console.log(report[0]['address'])
+        for(let i=0; i<=100; i+=.25){
+            newArr.push(i)
+        }
+        return newArr
+    }
+
+    const noi = report.map((value,i) =>{
+        console.log(report)
+        let noiObj = {};
+        
+    })
+ 
+    
+    console.log(report)
+    
     // console.log(report.map(x) => x.)
     useEffect(() => {
         getReport();
@@ -32,10 +50,21 @@ function Reports() {
     
                 <div className="border-b border-gray-200 shadow">
                     <div
-                        className="justify-center"
+                        className="grid justify-items-center border-4 text-lg"
                     >
+                        {report.length > 0 && 
+                        <div>
                         <h2>Report Name: {report[0]["address"]}</h2>
-                        <h3>Out Of Pocket: {Math.round((report[0]["price"])*(report[0]["down_payment"]))}</h3>
+                        <h3>Out Of Pocket: {Math.round((report[0]["price"]) * (report[0]["down_payment"]))}</h3>
+                        <h3>Cost Of Capital:
+                            <select onChange={(e) => setCostOfCapital(e.target.value)}>
+                                {numArr().map((val,i) => <option>{val}</option>)}
+                               
+                            </select>
+                        </h3>
+                        </div>
+                      
+                        }
                     </div>
                     <table className="divide-y divide-gray-900 table-fixed mt-3">
                         <thead className="bg-gray-50 flex-wrap">
@@ -72,9 +101,9 @@ function Reports() {
                                 <td className="px-6 py-4 text-sm text-gray-500">
                                   Financial Expenses
                                 </td>
-                                    {loan.map((value, i) =>
+                                    {report.map((value, i) =>
                                         <td className="px-6 py-4 text-sm text-gray-500">(${
-                                        value.principal + value.interest})
+                                        value.loan.principal + value.loan.interest})
                                         </td>)}                                  
                             </tr>
 
@@ -94,21 +123,68 @@ function Reports() {
                             </tr>
                             
                          
-                                    <tr className="max-w-lg bg-black white pt-96">
+                            <tr className="max-w-lg bg-black white pt-96">
+                                    <td className="px-6 py-4 text-sm text-white font-bold">
+                                        COC
+                                    </td>
+
+                                    {report.map((value, i) =>
                                         <td className="px-6 py-4 text-sm text-white font-bold">
-                                            COC
-                                        </td>
+                                            %{parseFloat((value.income -
+                                                (value.expenses.property_taxes + value.expenses.property_vacancy_rate + value.expenses.annual_property_repairs) -
+                                                (value.loan.principal + value.loan.interest)) / (value.down_payment * value.price / 100)).toFixed(2)
+                                                // /(report.down_pmt)
+                                            }
 
-                                        {report.map((value, i) =>
-                                            <td className="px-6 py-4 text-sm text-white font-bold">
-                                                %{parseFloat((value.income -
-                                                    (value.expenses.property_taxes + value.expenses.property_vacancy_rate + value.expenses.annual_property_repairs) -
-                                                    (value.loan.principal + value.loan.interest)) / (value.down_payment * value.price / 100)).toFixed(2)
-                                                    // /(report.down_pmt)
-                                                }
+                                        </td>)}
+                            </tr>
+                            <br></br>
+                            <tr className="max-w-lg bg-black white pt-96">
+                                    <td className="px-6 py-4 text-sm text-white font-bold">
+                                        Equity
+                                    </td>
 
-                                            </td>)}
-                                    </tr>
+                                    {report.map((value, i) =>
+                                        <td className="px-6 py-4 text-sm text-white font-bold">
+                                            ${Math.round(value.equity) 
+                                                
+                                                // /(report.down_pmt)
+                                            }
+
+                                        </td>)}
+                            </tr>
+                            <br></br>
+                            <tr className="max-w-lg bg-black white pt-96">
+                                    <td className="px-6 py-4 text-sm text-white font-bold">
+                                        Exit-Profit
+                                    </td>
+
+                                    {report.map((value, i) =>
+                                        <td className="px-6 py-4 text-sm text-white font-bold">
+                                            ${Math.round(value.equity - (value.price*value.down_payment)) 
+                                                
+                                                // /(report.down_pmt)
+                                            }
+
+                                        </td>)}
+                            </tr>
+                            <br></br>
+                            <tr className="max-w-lg bg-black white pt-96">
+                                    <td className="px-6 py-4 text-sm text-white font-bold">
+                                        Irr
+                                    </td>
+
+                                    {report.map((value, i) =>
+                                        <td className="px-6 py-4 text-sm text-white font-bold">
+                                            ${Math.round
+                                                (value.equity - (value.price*value.down_payment)) 
+                                                +
+                                                (value.income)
+                                                // /(report.down_pmt)
+                                            }
+
+                                        </td>)}
+                            </tr>
                             
                             
                      
