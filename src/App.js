@@ -16,6 +16,7 @@ import SavedProperties from './components/users/SavedProperties';
 import Metrics from "./components/metrics/Metrics";
 import myProperties from './components/properties/myProperties';
 import Main from "./components/feed/Main";
+import SignUp from "./components/header/SignUp";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/metrics" element={<Metrics/>}></Route>
           <Route path="/my-properties" element={<myProperties/>}></Route>
           <Route path="metrics/reports/:id" element={<Reports/>} ></Route>
+          <Route path="/sign-up" element={<SignUp/>} ></Route>
           {/* 
           <Route path="/search-properties" element={<PropertySearch />} />
           <Route path="selected-property/:id" element={<SelectedProperty />} />

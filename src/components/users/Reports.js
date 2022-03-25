@@ -26,20 +26,44 @@ function Reports() {
     const numArr = () => {
         let newArr = [];
 
-        for(let i=0; i<=100; i+=.25){
+        for(let i=0; i<=400; i+=.25){
             newArr.push(i)
         }
         return newArr
     }
 
-    const noi = report.map((value,i) =>{
-        console.log(report)
-        let noiObj = {};
-        
-    })
+    const noi = report.map((value, i) => 
+    Math.round(
+            (value.equity - (value.price * value.down_payment))
+        +
+        (value.income)
+        -
+        (value.expenses.property_taxes + value.expenses.property_vacancy_rate + value.expenses.annual_property_repairs) 
+        -
+        (value.loan.principal + value.loan.interest))
+    )
  
-    
+    const irr = () => {
+        let npv = 0 ;
+        let investment = report.map(value => value.down_payment*value.price)[0]
+        for(let i=0; i < noi.length; i++){
+            npv += noi[i]/((1+costOfCapital) ** (i+1))
+        }
+        const irr = () => {
+            let maxTries = 10000;
+            const delta = 0.001;
+            let i = 0;
+
+            while (i < maxTries) {
+
+            }
+        }
+        return (npv - investment)
+    }
+ 
+    console.log(noi)
     console.log(report)
+    console.log(irr())
     
     // console.log(report.map(x) => x.)
     useEffect(() => {
@@ -57,7 +81,7 @@ function Reports() {
                         <h2>Report Name: {report[0]["address"]}</h2>
                         <h3>Out Of Pocket: {Math.round((report[0]["price"]) * (report[0]["down_payment"]))}</h3>
                         <h3>Cost Of Capital:
-                            <select onChange={(e) => setCostOfCapital(e.target.value)}>
+                            <select onChange={(e) => parseFloat(setCostOfCapital(e.target.value/100))}>
                                 {numArr().map((val,i) => <option>{val}</option>)}
                                
                             </select>
@@ -171,7 +195,7 @@ function Reports() {
                             <br></br>
                             <tr className="max-w-lg bg-black white pt-96">
                                     <td className="px-6 py-4 text-sm text-white font-bold">
-                                        Irr
+                                        Positive Cash Flow
                                     </td>
 
                                     {report.map((value, i) =>
@@ -180,6 +204,11 @@ function Reports() {
                                                 (value.equity - (value.price*value.down_payment)) 
                                                 +
                                                 (value.income)
+                                                -
+                                                (value.expenses.annual_property_repairs + value.expenses.property_taxes + value.expenses.property_vacancy_rate)
+                                                -
+                                                (value.loan.principal + value.loan.interest)
+
                                                 // /(report.down_pmt)
                                             }
 

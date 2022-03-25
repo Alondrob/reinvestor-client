@@ -3,7 +3,7 @@ import HomePage from './HomePage'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
 import Login from './Login'
-import SignIn from './SignIn'
+import SignUp from './SignUp'
 import Logout from './Logout'
 
 const Header = () => {
@@ -12,7 +12,14 @@ const Header = () => {
             <HomePage />
             <SearchBar />
             <Login/>
-            <SignIn/>
+            
+            <div className="text-gray-100 font-bold from-neutral-100">
+                <Link to='/sign-up' >
+                    SignUp
+                </Link>
+            </div>
+           
+         
             <Logout/>
         </div>
     )
