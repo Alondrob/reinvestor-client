@@ -16,7 +16,10 @@ import SavedProperties from './components/users/SavedProperties';
 import Metrics from "./components/metrics/Metrics";
 import myProperties from './components/properties/myProperties';
 import Main from "./components/feed/Main";
-import SignUp from "./components/header/SignUp";
+import SignUp from "./components/users/SignUp";
+import Login from "./components/users/Login";
+import Logout from "./components/users/Logout";
+import Profile from "./components/users/Profile";
 
 
 const App = () => {
@@ -26,12 +29,15 @@ const App = () => {
 
       <Router>
         <Header />
+       <Profile/>
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/metrics" element={<Metrics/>}></Route>
           <Route path="/my-properties" element={<myProperties/>}></Route>
           <Route path="metrics/reports/:id" element={<Reports/>} ></Route>
           <Route path="/sign-up" element={<SignUp/>} ></Route>
+          <Route path="/login" element={<Login/>} ></Route>
+          <Route path="/log-out" element={<Logout/>} ></Route>
           {/* 
           <Route path="/search-properties" element={<PropertySearch />} />
           <Route path="selected-property/:id" element={<SelectedProperty />} />
