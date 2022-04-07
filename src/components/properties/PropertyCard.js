@@ -19,7 +19,7 @@ function PropertyCard({price, state, address, sqft, image, beds, county, type, n
     }
   return (
       <div>
-          <div className='bg-white rounded-md align-center'>
+          <div className='bg-white rounded-md align-center border-4 border-b-2'>
               property
               <card> property </card>
               <img src={image}/>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
     name: "user",
@@ -8,11 +8,12 @@ export const userSlice = createSlice({
 
     reducers: {
         signup:(state, action) => {
-            state.name = action.payload.name;
-            state.email = action.payload.email;
-            state.password = action.payload.password;
-            state.passwordConfirmation = action.payload.passwordConfirmation;
-            // state.value = action.payload
+            // state.name = action.payload.name;
+            // state.email = action.payload.email;
+            // state.password = action.payload.password;
+            // state.passwordConfirmation = action.payload.passwordConfirmation;
+            // // state.value = action.payload
+            state.user = action.payload
         },
         login:(state, action) => {
             state.name = action.payload.name;

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {useDispatch, useSelector}  from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {signup} from '../../redux/userSlice';
+import userReducer from '../../redux/userSlice';
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -15,11 +16,22 @@ function SignUp() {
     const dispatch = useDispatch();
 
     console.log(formData)
+    console.log(userReducer)
 
    const handleSubmit = (e) => {
      e.preventDefault();
      dispatch(signup(formData))
+
+     setFormData({});
+     
    }
+
+
+   const signedUser = useSelector((state) => {
+     return state.user
+   })
+
+   console.log(signedUser)
 
   return (
     <div class="w-full max-w-xs justify-center ">
