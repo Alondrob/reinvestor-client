@@ -29,7 +29,7 @@ const App = () => {
 
       <Router>
         <Header />
-       <Profile/>
+       {/* <Profile/> */}
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/metrics" element={<Metrics/>}></Route>

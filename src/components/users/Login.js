@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux';
-import {login, signup} from '../../redux/userSlice';
+// import {login, signup} from '../../redux/userSlice';
 
 
 function Login() {
@@ -16,7 +16,7 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(dispatch)
-    dispatch(login(loginData))
+    // dispatch(login(loginData))
   }
 
   return (

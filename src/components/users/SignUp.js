@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {useDispatch, useSelector}  from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {signup} from '../../redux/userSlice';
-import userReducer from '../../redux/userSlice';
+import { signupUser, userSelector, clearState } from '../../redux/userSlice';
+// import userReducer from '../../redux/userSlice';
+import { createUser } from '../../api/apiCalls';
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -16,22 +17,68 @@ function SignUp() {
     const dispatch = useDispatch();
 
     console.log(formData)
-    console.log(userReducer)
+    
 
    const handleSubmit = (e) => {
      e.preventDefault();
-     dispatch(signup(formData))
-
-     setFormData({});
+     dispatch(signupUser(formData))
+     createUser()
      
-   }
+    }
+    useEffect(() => {
+      return () => {
+        dispatch(clearState());
+      };
+    },[])
+
+  // const { isFetching, isSuccess, isError, errorMessage } = useSelector(
+  //   userSelector
+  // );
+  
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(clearState());
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     dispatch(clearState());
+  //     navigate('/');
+  //   }
+  //   if (isError) {
+  //     // toast.error(errorMessage);
+  //     dispatch(clearState());
+  //   }
+  // }, [isSuccess, isError]);
+
+  // const signedUser = useSelector((state) => {
+  //   return state.user["user"]
+  // })
+  //    fetch(url, {
+  //      method: 'POST',
+  //      headers: {
+  //        "Accept": "application/json",
+  //        'Content-Type': "application/json",
+  //      },
+  //      body: JSON.stringify(signedUser)
+  //    }
+  //    )
+  //      .then(response => response.json())
+  //      .then((data) => {
+  //        if (data) {
+  //          navigate(`user/${data.id}`)
+  //        }
+  //      })
+  //    setFormData({});
+     
+  //  }
 
 
-   const signedUser = useSelector((state) => {
-     return state.user
-   })
+   
 
-   console.log(signedUser)
+   
+
+  //  console.log(signedUser)
 
   return (
     <div class="w-full max-w-xs justify-center ">
