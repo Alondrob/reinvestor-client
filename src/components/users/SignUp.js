@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import {useDispatch, useSelector}  from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { signupUser, userSelector, clearState } from '../../redux/userSlice';
+import { signupUser, userSelector, clearState, onClickGetData } from '../../redux/userSlice';
 // import userReducer from '../../redux/userSlice';
 import { createUser } from '../../api/apiCalls';
+import { selectIsLoading } from './selectors';
 
-function SignUp() {
+function SignUp(userName) {
+const isLoading = useSelector(state => state.user.isLoading)
+const houses = useSelector(state => state.user.houses)
+const isError = useSelector(state => state.user.isError)
+  //const isLoading = useSelector(selectIsLoading)
+
+  console.log('isLoading:',isLoading)
     const [formData, setFormData] = useState({
       name: '',
       email: '',
@@ -16,13 +23,15 @@ function SignUp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    console.log(formData)
+
     
 
    const handleSubmit = (e) => {
      e.preventDefault();
+
+     console.log("formData",formData)
      dispatch(signupUser(formData))
-     createUser()
+     //createUser()
      
     }
     useEffect(() => {
@@ -31,57 +40,17 @@ function SignUp() {
       };
     },[])
 
-  // const { isFetching, isSuccess, isError, errorMessage } = useSelector(
-  //   userSelector
-  // );
   
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(clearState());
-  //   };
-  // }, []);
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     dispatch(clearState());
-  //     navigate('/');
-  //   }
-  //   if (isError) {
-  //     // toast.error(errorMessage);
-  //     dispatch(clearState());
-  //   }
-  // }, [isSuccess, isError]);
 
-  // const signedUser = useSelector((state) => {
-  //   return state.user["user"]
-  // })
-  //    fetch(url, {
-  //      method: 'POST',
-  //      headers: {
-  //        "Accept": "application/json",
-  //        'Content-Type': "application/json",
-  //      },
-  //      body: JSON.stringify(signedUser)
-  //    }
-  //    )
-  //      .then(response => response.json())
-  //      .then((data) => {
-  //        if (data) {
-  //          navigate(`user/${data.id}`)
-  //        }
-  //      })
-  //    setFormData({});
-     
-  //  }
 
 
    
 
-   
-
-  //  console.log(signedUser)
-
+  
   return (
+        
     <div class="w-full max-w-xs justify-center ">
+           {/* <button onClick={() => dispatch(onClickGetData(houses))}>fetch data</button> */}
       <div className="bg-pink-100 md:items-center">
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
 

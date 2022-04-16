@@ -1,0 +1,159 @@
+# Query: console.log
+# ContextLines: 1
+
+44 results - 14 files
+
+src/index.js:
+  17  // If you want to start measuring performance in your app, pass a function
+  18: // to log results (for example: reportWebVitals(console.log))
+  19  // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
+src/api/apiCalls.js:
+  6      
+  7:   
+  8  }
+
+src/components/metrics/Metrics.js:
+  66      
+  67:        
+  68      
+
+src/components/metrics/Purchase.js:
+   8           
+   9:     //       
+  10      //        handlePurchase({
+
+  14  
+  15:    
+  16    return (
+
+src/components/properties/Data.js:
+  18  
+  19:     
+  20  
+
+src/components/properties/PropertyCard.js:
+   6      const accntPrice = (price) => {
+   7:         
+   8          let str = price.toLocaleString("en-US");
+
+  14          type.toString()
+  15:       
+  16         return type.charAt(0).toUpperCase() + type.slice(1)
+
+src/components/sideBar/SideBar.js:
+  11      const test = () => {
+  12:         
+  13      }
+
+src/components/users/actions.js:
+  29              let data = await response.json();
+  30:             
+  31  
+
+  38          } catch (e) {
+  39:          
+  40              return thunkAPI.rejectWithValue(e.response.data);
+
+src/components/users/Login.js:
+  13  
+  14:   
+  15  
+
+  17      e.preventDefault();
+  18:     
+  19     
+
+src/components/users/Profile.js:
+  7  
+  8: //     
+  9  //     return (
+
+src/components/users/Reports.js:
+  10  
+  11:    
+  12  
+
+  14  
+  15:     // console.log(id)
+  16  
+
+  63 
+  67      
+  68:     // console.log(report.map(x) => x.)
+  69      useEffect(() => {
+
+src/components/users/SignUp.js:
+    9  function SignUp(userName) {
+   10: const isLoading = useSelector(state => console.log('state') ||  state.user.isLoading)
+   11  const houses = useSelector(state => state.user.houses)
+   12: const isError = useSelector(state => console.log('state') ||  state.user.isError)
+   13    //const isLoading = useSelector(selectIsLoading)
+   14  
+   15:   
+   16      const [formData, setFormData] = useState({
+
+   31  
+   32:    
+   33       dispatch(signupUser(formData))
+
+  103  
+  104
+  105:
+  106    return houses.length ? <div>{houses.length}</div> : (
+
+src/features/authService.js:
+  15      const response = await fetch(API_URL, obj);
+  16:     
+  17      if (response.data) {
+
+src/redux/userSlice.js:
+    5      async (data) => {
+    6:         
+    7          const token = window.rls(token)
+
+   10          const responseJson = await response.json();
+   11:         
+   12  
+
+   18      async ({ name, email, password  }, thunkAPI) => {
+   19:        
+   21          try {
+
+   37              let data = await response.json
+   39  
+
+   46          } catch (e) {
+   47:             
+   48              return thunkAPI.rejectWithValue(e.response.data);
+
+   78          [signupUser.fulfilled]: (state, { payload }) => {
+   79:             
+   80              state.isFetching = false;
+
+   85          [signupUser.pending]: (state) => {
+   86:           
+   88              state.isFetching = true;
+
+   91          [signupUser.rejected]: (state, { payload }) => {
+   92:             console.log('reject')
+   93              state.isFetching = false;
+
+   98          [onClickGetData.fulfilled]: (state, { payload }) => {
+   99:             console.log("string", onClickGetData.fulfilled)
+  100:             console.log('success')
+  101:             console.log(payload)
+  102              state.houses = payload
+
+  104          [onClickGetData.pending]: (state, { payload }) => {
+  105:             console.log('pending')
+  106:             console.log(payload)
+  107              state.isLoading = true;
+
+  118      //     [loginUser.rejected]: (state, { payload }) => {
+  119:     //         console.log('payload', payload);
+  120      //         state.isFetching = false;
+
+  137      //     [fetchUserBytoken.rejected]: (state) => {
+  138:     //         console.log('fetchUserBytoken');
+  139      //         state.isFetching = false;

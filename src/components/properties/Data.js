@@ -16,7 +16,7 @@ const Data = () => {
         propertiesRequest();
     }, [])
 
-    console.log(properties)
+    
 
     return (
 

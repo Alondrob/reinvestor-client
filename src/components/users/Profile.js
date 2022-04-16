@@ -14,8 +14,8 @@
 //               <p>Password {user.password}</p>
 //               <p>Password Confirmation</p>
 
-//           </div>
-//     )
+    //       </div>
+    // )
 // }
 
 // export default Profile

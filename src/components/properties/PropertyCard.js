@@ -4,7 +4,7 @@ import {BiBath, BiBed} from 'react-icons/bi'
 function PropertyCard({price, state, address, sqft, image, beds, county, type, neighborhood}) {
 
     const accntPrice = (price) => {
-        console.log("price",price)
+       
         let str = price.toLocaleString("en-US");
         let str2 = str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return str2;
@@ -12,7 +12,7 @@ function PropertyCard({price, state, address, sqft, image, beds, county, type, n
     }
     const cap = (type) => {
         type.toString()
-       console.log(type.slice(1))
+    
        return type.charAt(0).toUpperCase() + type.slice(1)
 
         
