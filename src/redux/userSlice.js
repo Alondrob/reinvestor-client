@@ -12,10 +12,13 @@ export const signupUser = createAsyncThunk('user/signupUser',
                 "content-type":"application/json"
             },
             body: JSON.stringify({
-                user_name: userData.name,
-                email: userData.email,
-                password: userData.password,
-                password_confirmation: userData.password_confirmation
+                user:{
+                    user_name: userData.name,
+                    email: userData.email,
+                    password: userData.password
+                }
+              
+              
             })
         }
         fetch(url, apiObject)
@@ -26,41 +29,6 @@ export const signupUser = createAsyncThunk('user/signupUser',
 )
 
 
-// export const signupUser = createAsyncThunk(
-//     'users/signupUser',
-//     async (data, thunkAPI) => {
-        
-//         console.log("userData",data)
-//         try {
-//             const response = await fetch(
-//                 'http://localhost:3000/users',
-//                 {
-//                     method: 'POST',
-//                     headers: {
-//                         Accept: 'application/json',
-//                         'Content-Type': 'application/json',
-//                     },
-//                     body: JSON.stringify(
-//                        data
-//                     ),
-//                 }
-//             );
-//             console.log("response", response)
-//             let data = await response.json();
-//             console.log('data', data);
-
-//             if (response.status === 200) {
-//                 localStorage.setItem('token', data.token);
-//                 return { ...data, username: data};
-//             } else {
-//                 return thunkAPI.rejectWithValue(data);
-//             }
-//             } catch (e) {
-//                 console.log('Error', e.response.data);
-//                 return thunkAPI.rejectWithValue(e.response.data);
-//         }
-//     }
-// );
 
 
 

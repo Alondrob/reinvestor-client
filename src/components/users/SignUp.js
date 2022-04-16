@@ -28,9 +28,14 @@ const isError = useSelector(state => state.user.isError)
 
    const handleSubmit = (e) => {
      e.preventDefault();
-
+      if(formData.password === formData.passwordConfirmation) {
+        dispatch(signupUser(formData))
+      }
+      else {
+        alert("Password doesn't match!")
+      }
      console.log("formData",formData)
-     dispatch(signupUser(formData))
+     
      //createUser()
      
     }
