@@ -19,7 +19,7 @@ import Main from "./components/feed/Main";
 import SignUp from "./components/users/SignUp";
 import Login from "./components/users/Login";
 import Logout from "./components/users/Logout";
-import Profile from "./components/users/Profile";
+
 
 
 const App = () => {

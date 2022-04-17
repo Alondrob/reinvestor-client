@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import {useDispatch, useSelector}  from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { signupUser, userSelector, clearState, onClickGetData } from '../../redux/userSlice';
-// import userReducer from '../../redux/userSlice';
-import { createUser } from '../../api/apiCalls';
-import { selectIsLoading } from './selectors';
+import { signupUser } from '../../redux/actions/userActions';
 
-function SignUp(userName) {
-const isLoading = useSelector(state => state.user.isLoading)
-const houses = useSelector(state => state.user.houses)
-const isError = useSelector(state => state.user.isError)
-  //const isLoading = useSelector(selectIsLoading)
 
-  console.log('isLoading:',isLoading)
+
+
+function SignUp() {
+
     const [formData, setFormData] = useState({
       name: '',
       email: '',
@@ -29,6 +24,8 @@ const isError = useSelector(state => state.user.isError)
    const handleSubmit = (e) => {
      e.preventDefault();
       if(formData.password === formData.passwordConfirmation) {
+        console.log('before test')
+        console.log('after test')
         dispatch(signupUser(formData))
       }
       else {
@@ -39,17 +36,6 @@ const isError = useSelector(state => state.user.isError)
      //createUser()
      
     }
-    useEffect(() => {
-      return () => {
-        dispatch(clearState());
-      };
-    },[])
-
-  
-
-
-
-   
 
   
   return (
