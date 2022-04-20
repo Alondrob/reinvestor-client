@@ -35,4 +35,37 @@ export const signupUser = (userData) => {
     
     }
 }
+
+export const userAuth = () => {
+    return (dispatch) => {
+        let url = 'http://localhost:3000/current_user';
+        let apiObject = {
+            headers: {
+                accept: "application/json",
+                "content-type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }   
+        }
+
+        return fetch(url, apiObject)
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                        .then(user => {
+                            dispatch({
+                                type: 'CREATE_USER',
+                                user: user
+                        })
+                    })
+                }
+                else {
+                    dispatch({
+                        type: 'LOGGED_OUT_USER',
+                    })
+                }
+           })
+          
+    
+    }
+}
     

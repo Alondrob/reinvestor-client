@@ -19,11 +19,19 @@ import Main from "./components/feed/Main";
 import SignUp from "./components/users/SignUp";
 import Login from "./components/users/Login";
 import Logout from "./components/users/Logout";
-
+import { useEffect } from "react";
+import { userAuth } from "./redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 
 const App = () => {
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userAuth());
+  }, [])
+  
   return (
     <div>
 

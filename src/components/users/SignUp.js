@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { signupUser } from '../../redux/actions/userActions';
 
 
-
-
 function SignUp() {
 
     const [formData, setFormData] = useState({
@@ -21,19 +19,23 @@ function SignUp() {
 
     
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
      e.preventDefault();
       if(formData.password === formData.passwordConfirmation) {
         console.log('before test')
         console.log('after test')
-        dispatch(signupUser(formData))
+        dispatch(signupUser(formData)).then(() => {
+          navigate('/')
+        })
+        
+        
       }
       else {
         alert("Password doesn't match!")
       }
      console.log("formData",formData)
      
-     //createUser()
+      
      
     }
 
