@@ -68,4 +68,14 @@ export const userAuth = () => {
     
     }
 }
+
+export const userLoggout = () => {
+    return (dispatch) => {
+        dispatch({
+        type: 'LOGGED_OUT_USER'
+    })
+    }
+   
+       
+}
     
