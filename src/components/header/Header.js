@@ -12,7 +12,7 @@ const Header = () => {
     const userState = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-  console.log(userState);
+  
 
     const handleLoggout = async () => {
         console.log('handle logout')
