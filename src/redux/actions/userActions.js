@@ -53,7 +53,7 @@ export const userAuth = () => {
                     return res.json()
                         .then(user => {
                             dispatch({
-                                type: 'CREATE_USER',
+                                type: 'AUTHENTICATE_USER',
                                 user: user
                         })
                     })
@@ -78,40 +78,6 @@ export const userLoggout = () => {
 }
 
 
-    
-// export const userLogin = (userData) => {
-    
-//     return (dispatch) => {
-//         let url = 'http://localhost:3000/sessions';
-//         let apiObject = {
-//             method: 'POST',
-//             headers: {
-//                 accept: "application/json",
-//                 "content-type": "application/json"
-//             },
-//             body: JSON.stringify({
-//                 user: {
-//                     email: userData.email,
-//                     password: userData.password
-//                 }
-//             })
-//         }
-
-//         return fetch(url, apiObject)
-//             .then(response => response.json())
-//             .then(data => {
-//                 localStorage.setItem('token', data.token)
-//                 console.log(data, 'userReq')
-//                 dispatch({
-//                     type: 'LOGGIN_USER', 
-//                     user: data.user,
-//                     token: data.token
-//                 })
-//             }
-//             )
-    
-//     }
-// }
 
 export const userLogin = (userData) => {
     console.log('hit the action', userData)

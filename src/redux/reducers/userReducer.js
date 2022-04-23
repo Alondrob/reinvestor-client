@@ -6,12 +6,17 @@ const userReducer = (state = {user: undefined, token: "", loggedIn: false}, acti
                 return {
                     user: action.user,
                     token: action.token,
-                    loggedIn: true
+                    
                 }
             case "LOGGIN_USER":
                 return {
                     user: action.user,
                     token: action.token,
+                }
+            case "AUTHENTICATE_USER":
+                return {
+                    user: action.user,
+                    toke: action.token,
                     loggedIn: true
                 }
             case "LOGGED_OUT_USER":

@@ -1,22 +1,31 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux';
-import { userLogin} from '../../redux/actions/userActions';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { userAuth, userLogin} from '../../redux/actions/userActions';
 
 
 
-function Login() {
+const Login = () => {
 
   const [loginData, setLoginData] = useState({
     email:'',
     password:''
   })
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(userLogin(loginData))
+    dispatch(userLogin(loginData)).then(() => {
+      dispatch(userAuth())
+    }).then(() => {
+      navigate('/')
+    })
+      
+   
   }
 
   return (

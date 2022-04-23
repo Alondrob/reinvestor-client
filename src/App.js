@@ -21,12 +21,14 @@ import Login from "./components/users/Login";
 import Logout from "./components/users/Logout";
 import { useEffect } from "react";
 import { userAuth } from "./redux/actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const App = () => {
 
   const dispatch = useDispatch();
+  const token = useSelector(state => state.userReducer.user)
+ 
 
   useEffect(() => {
     dispatch(userAuth());
